@@ -4,6 +4,39 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="alien" class="com.river.Alien"></bean>
+    <bean id="laptop" class="com.river.Laptop"/>
+    <bean id="book" class="com.river.Book"/>
+
+<!--    interface-->
+    <bean id="transport1" class="com.river.Car" primary="true" lazy-init="true"/>
+    <bean id="transport" class="com.river.Bike" />
+<!--    <bean id="transport" class="com.river.Transport"/>-->
+
+<!--    <bean id="alien" class="com.river.Alien" scope="prototype"></bean>-->
+    <bean id="alien" class="com.river.Alien" autowire="byType">
+<!--        Spring call constructor before setter so age always 20-->
+        <property name="age" value="20"/>
+<!--        must create constructor ORDER same as the Alien class-->
+<!--        if not follow the order we can declare type, But it not work if constructor have same type-->
+<!--        if not follow the order we can use index-->
+<!--        can use name but follow the order-->
+        <constructor-arg name="book" type="com.river.Book" ref="book"/>
+        <constructor-arg index="0" value="22"/>
+
+<!--        <property name="laptop" value="laptop"></property> can not, need to use ref-->
+<!--        name="laptop": value in the Alien class, ref="laptop": value of laptop bean in the spring.xml-->
+        <property name="laptop" ref="laptop"/>
+
+<!--        we can use autowired instead of <property name="transport" ref="transport"/> -->
+<!--        autowire="byName" will find bean has same nam in this file-->
+<!--        autowire="byType" will find bean has same type in this file-->
+        <property name="transport" ref="transport"/>
+
+<!--        inner bean-->
+        <property name="pen">
+            <bean class="com.river.Pen"/>
+        </property>
+
+    </bean>
 
 </beans>
