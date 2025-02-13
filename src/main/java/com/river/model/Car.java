@@ -1,5 +1,10 @@
-package com.river;
+package com.river.model;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+@Component
+@Primary
 public class Car implements Transport {
 
     public Car () {

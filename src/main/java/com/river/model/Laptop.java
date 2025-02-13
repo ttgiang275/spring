@@ -1,4 +1,4 @@
-package com.river;
+package com.river.model;
 
 public class Laptop {
     public Laptop() {
